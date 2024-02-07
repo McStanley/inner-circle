@@ -1,0 +1,51 @@
+{
+  "name": "inner-circle",
+  "version": "0.0.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/McStanley/inner-circle.git"
+  },
+  "author": {
+    "name": "Stanisław Olejniczak",
+    "email": "0stanislawolejniczak0@gmail.com",
+    "url": "https://github.com/McStanley"
+  },
+  "scripts": {
+    "build": "npm run clean && tsc --build --verbose && npm run tailwind:build",
+    "clean": "rimraf ./dist ./public/styles/main.css",
+    "debug": "DEBUG=inner-circle:* npm run dev",
+    "dev": "conc -n server,tailwind -c green,cyan \"nodemon ./src/server.ts\" \"npm run tailwind:watch\"",
+    "start": "node ./dist/server.js",
+    "tailwind:build": "tailwindcss -i ./styles/tailwind.css -o ./public/styles/main.css",
+    "tailwind:watch": "tailwindcss -i ./styles/tailwind.css -o ./public/styles/main.css --watch"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.18.2",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "@prettier/plugin-pug": "^3.0.0",
+    "@types/cookie-parser": "^1.4.6",
+    "@types/debug": "^4.1.12",
+    "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^20.11.16",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "nodemon": "^3.0.3",
+    "prettier": "3.1.0",
+    "prettier-plugin-packagejson": "^2.4.10",
+    "rimraf": "^5.0.5",
+    "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

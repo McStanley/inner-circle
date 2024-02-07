@@ -1,0 +1,11 @@
+# Dependency directory
+node_modules/
+
+# Compiled JavaScript files
+dist/
+
+# Generated CSS stylesheet
+public/styles/main.css
+
+# Environment variables file
+.env
