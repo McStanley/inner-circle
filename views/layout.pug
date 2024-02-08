@@ -1,9 +1,29 @@
 doctype html
-html(lang='en')
+html(lang='en', class='h-full')
   head
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title Inner Circle
     link(rel='stylesheet', href='/static/styles/main.css')
-  body
-    block content
+  body(class='flex h-full flex-col bg-slate-200')
+    header(class='bg-gray-800')
+      nav(class='mx-auto flex max-w-7xl items-baseline gap-2 px-6 py-2')
+        a(href='/', class='text-3xl duration-150 hover:scale-110 hover:saturate-150') 👥
+        a(
+          href='/room',
+          class='mr-auto rounded px-3 py-2 text-gray-200 duration-100 hover:bg-gray-700 hover:text-white'
+        ) Room
+        a(
+          href='/log-in',
+          class='rounded px-3 py-2 text-gray-200 duration-100 hover:bg-gray-700 hover:text-white'
+        ) Log in
+        a(
+          href='/sign-up',
+          class='rounded px-3 py-2 text-gray-200 duration-100 hover:bg-gray-700 hover:text-white'
+        ) Sign up
+    main(class='flex-grow')
+      div(class='mx-auto h-full max-w-7xl px-6 py-4')
+        block content
+    footer
+      div(class='mx-auto max-w-7xl border-t border-gray-300 px-6 py-4')
+        small © 2024 Stanisław Olejniczak

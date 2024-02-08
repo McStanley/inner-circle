@@ -1,4 +1,16 @@
 extends layout
 
 block content
-  h1 Inner Circle
+  div(class='flex h-full flex-col items-center justify-center gap-6 text-center')
+    h1(class='text-5xl font-medium') Inner Circle
+    p(class='leading-relaxed tracking-wide text-gray-700') 
+      | Welcome to Inner Circle, where exclusivity meets community. Join us in our room for meaningful discussions and connections.
+    div(class='flex items-center gap-6')
+      a(
+        href='/room',
+        class='rounded bg-indigo-600 px-3 py-2 text-white duration-100 hover:bg-indigo-500'
+      ) Enter the room
+      a(href='/about', class='hover:text-gray-700') 
+        | Learn more
+        |
+        span(aria-hidden) ➜
