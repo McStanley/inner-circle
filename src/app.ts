@@ -5,6 +5,7 @@ import logger from 'morgan';
 import path from 'path';
 
 import indexRouter from './routes/index';
+import authRouter from './routes/auth';
 
 const ROOT_DIR = path.join(__dirname, '..');
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use('/static', express.static(path.join(ROOT_DIR, 'public')));
 
 app.use('/', indexRouter);
+app.use('/', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
