@@ -5,4 +5,6 @@ const router = Router();
 
 router.get('/sign-up', authController.signup_GET);
 
+router.get('/log-in', authController.login_GET);
+
 export default router;
