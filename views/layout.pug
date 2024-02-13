@@ -13,14 +13,21 @@ html(lang='en', class='h-full')
           href='/room',
           class='mr-auto rounded px-3 py-2 text-gray-200 duration-100 hover:bg-gray-700 hover:text-white'
         ) Room
-        a(
-          href='/log-in',
-          class='rounded px-3 py-2 text-gray-200 duration-100 hover:bg-gray-700 hover:text-white'
-        ) Log in
-        a(
-          href='/sign-up',
-          class='rounded px-3 py-2 text-gray-200 duration-100 hover:bg-gray-700 hover:text-white'
-        ) Sign up
+        if user
+          span(class='hidden text-gray-300 sm:inline') Hello, #{ user.username }
+          a(
+            href='/log-out',
+            class='rounded px-3 py-2 text-gray-200 duration-100 hover:bg-gray-700 hover:text-white'
+          ) Log out
+        else
+          a(
+            href='/log-in',
+            class='rounded px-3 py-2 text-gray-200 duration-100 hover:bg-gray-700 hover:text-white'
+          ) Log in
+          a(
+            href='/sign-up',
+            class='rounded px-3 py-2 text-gray-200 duration-100 hover:bg-gray-700 hover:text-white'
+          ) Sign up
     main(class='flex-grow')
       div(class='mx-auto h-full max-w-7xl px-6 py-4')
         block content

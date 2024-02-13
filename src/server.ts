@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 
 /**
+ * Load environment variables.
+ */
+
+import 'dotenv/config';
+import env from './env';
+
+/**
  * Module dependencies.
  */
 
@@ -10,22 +17,11 @@ import http from 'http';
 import mongoose from 'mongoose';
 
 /**
- * Load environment variables.
- */
-
-import 'dotenv/config';
-
-/**
  * Connect to database.
  */
 
-if (!process.env.MONGODB_URI) {
-  console.error('MONGODB_URI variable missing from .env');
-  process.exit(1);
-}
-
 mongoose
-  .connect(process.env.MONGODB_URI, { dbName: 'innerCircle' })
+  .connect(env.MONGODB_URI, { dbName: 'innerCircle' })
   .catch((e: Error) => console.error(e.toString()));
 
 mongoose.connection.on('connected', () => console.log('MongoDB: Connected'));

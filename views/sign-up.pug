@@ -4,9 +4,14 @@ block content
   div(class='flex h-full flex-col items-center justify-center gap-6')
     p(class='text-center text-4xl', aria-hidden) 👥
     h1(class='mt-6 text-center text-2xl font-medium tracking-tight text-gray-900') Sign up for an account
+    if errors
+      each error in errors
+        article(class='flex gap-2 rounded-md bg-rose-400 py-2 pl-3 pr-5')
+          span ⚠
+          span(class='text-center font-medium tracking-wide text-gray-800')= error.msg
     form(action='', method='post', class='flex w-full max-w-sm flex-col')
       label(for='username') Username
-      input#username(type='text', name='username')
+      input#username(type='text', name='username', value=username)
       label(for='password') Password
       input#password(type='password', name='password')
       label(for='password2') Confirm password

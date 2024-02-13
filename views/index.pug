@@ -3,8 +3,20 @@ extends layout
 block content
   div(class='flex h-full flex-col items-center justify-center gap-6 text-center')
     h1(class='text-5xl font-medium') Inner Circle
-    p(class='leading-relaxed tracking-wide text-gray-700') 
-      | Welcome to Inner Circle, where exclusivity meets community. Join us in our room for meaningful discussions and connections.
+    p(class='max-w-prose leading-relaxed tracking-wide text-gray-700') 
+      if user
+        | You are logged in, #[b= user.username]. Go ahead and enter the room to chat with other members.
+        | Please remember to follow the rules of
+        |
+        a(
+          href='https://techterms.com/definition/netiquette',
+          target='_blank',
+          class='text-indigo-800 underline decoration-transparent duration-100 hover:decoration-inherit'
+        ) netiquette
+        | .
+      else
+        | Welcome to Inner Circle, where exclusivity meets community.
+        | Join others in the room for meaningful discussions and connections.
     div(class='flex items-center gap-6')
       a(
         href='/room',

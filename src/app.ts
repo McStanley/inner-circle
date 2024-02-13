@@ -2,10 +2,16 @@ import cookieParser from 'cookie-parser';
 import express, { ErrorRequestHandler } from 'express';
 import createError from 'http-errors';
 import logger from 'morgan';
+import passport from 'passport';
 import path from 'path';
+
+import session from './middleware/session';
+import populateUser from './middleware/populateUser';
 
 import indexRouter from './routes/index';
 import authRouter from './routes/auth';
+
+import './auth/initPassport';
 
 const ROOT_DIR = path.join(__dirname, '..');
 
@@ -16,9 +22,16 @@ app.set('views', path.join(ROOT_DIR, 'views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(session);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(populateUser);
+
 app.use('/static', express.static(path.join(ROOT_DIR, 'public')));
 
 app.use('/', indexRouter);
