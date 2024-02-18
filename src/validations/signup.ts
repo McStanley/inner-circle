@@ -9,7 +9,10 @@ const validations = [
     .isLength({ max: 24 })
     .withMessage('Username cannot exceed 24 characters')
     .custom(async (input) => {
-      const existingUser = await User.findOne({ username: input });
+      const existingUser = await User.findOne({ username: input }).collation({
+        locale: 'en',
+        strength: 2,
+      });
 
       if (existingUser) {
         throw new Error('This username is taken');
