@@ -1,0 +1,57 @@
+extends layout
+
+block content
+  if user
+    form(
+      action='/room/submit',
+      method='post',
+      class='mx-auto flex max-w-xl items-center pl-3'
+    )
+      textarea(
+        placeholder='Your message',
+        rows='1',
+        class='mx-4 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-indigo-800'
+      )
+      button(
+        type='submit',
+        class='group rounded-full p-2 text-indigo-600 duration-100 hover:bg-indigo-200'
+      )
+        svg(
+          viewBox='0 0 20 20',
+          fill='currentColor',
+          class='size-6 rotate-90 duration-100 group-hover:rotate-45'
+        )
+          path(
+            d='M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z'
+          )
+  else
+    p(class='mx-auto w-fit text-center text-lg leading-8 text-slate-900')
+      a(href='/log-in', class='text-indigo-600 duration-100 hover:text-indigo-500') Log in
+      |
+      | or
+      |
+      a(href='/sign-up', class='text-indigo-600 duration-100 hover:text-indigo-500') sign up
+      |
+      |
+      span(class='block min-[500px]:inline') in order to chat.
+  ol(class='relative mx-auto mt-6 max-w-3xl border-l border-gray-300')
+    each _ in Array(7)
+      li(class='mb-10 ml-6 last:mb-0')
+        div(
+          class='absolute -left-3 size-6 rounded-full bg-indigo-100 ring-8 ring-slate-200'
+        )
+          img(
+            src='https://api.dicebear.com/7.x/avataaars-neutral/svg?seed=McStanley',
+            alt='McStanley',
+            class='rounded-full shadow-lg'
+          )
+        article(
+          class='rounded-lg border border-slate-300 p-4 shadow-sm duration-200 hover:shadow-md'
+        )
+          div(class='mb-3 sm:flex sm:flex-row-reverse sm:items-center sm:justify-between')
+            time(class='mb-1 text-sm text-slate-600 sm:mb-0') 2 hours ago
+            div(class='font-medium text-slate-700') McStanley
+          div(
+            class='rounded-lg border border-slate-300 p-3 text-justify text-sm text-slate-600'
+          )
+            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet amet explicabo delectus id neque deserunt voluptatibus libero adipisci. Cum voluptates alias voluptatibus, dicta nostrum similique vitae repudiandae neque nisi tempora.

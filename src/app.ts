@@ -10,6 +10,7 @@ import populateUser from './middleware/populateUser';
 
 import indexRouter from './routes/index';
 import authRouter from './routes/auth';
+import roomRouter from './routes/room';
 
 import './auth/initPassport';
 
@@ -36,6 +37,7 @@ app.use('/static', express.static(path.join(ROOT_DIR, 'public')));
 
 app.use('/', indexRouter);
 app.use('/', authRouter);
+app.use('/room', roomRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
