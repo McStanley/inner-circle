@@ -1,6 +1,13 @@
 extends layout
 
 block content
+  if errors
+    each error in errors
+      article(
+        class='mx-auto mb-6 flex w-fit gap-2 rounded-md bg-rose-400 py-2 pl-3 pr-5'
+      )
+        span ⚠
+        span(class='text-center font-medium tracking-wide text-gray-800')= error.msg
   if user
     form(
       action='/room/submit',
@@ -8,7 +15,9 @@ block content
       class='mx-auto flex max-w-xl items-center pl-3'
     )
       textarea(
+        name='message',
         placeholder='Your message',
+        value=messageText,
         rows='1',
         class='mx-4 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-indigo-800'
       )
@@ -35,23 +44,27 @@ block content
       |
       span(class='block min-[500px]:inline') in order to chat.
   ol(class='relative mx-auto mt-6 max-w-3xl border-l border-gray-300')
-    each _ in Array(7)
+    each message in messages
       li(class='mb-10 ml-6 last:mb-0')
         div(
           class='absolute -left-3 size-6 rounded-full bg-indigo-100 ring-8 ring-slate-200'
         )
+          - const avatarSeed = encodeURIComponent(message.author.username);
           img(
-            src='https://api.dicebear.com/7.x/avataaars-neutral/svg?seed=McStanley',
-            alt='McStanley',
+            src=`https://api.dicebear.com/7.x/avataaars-neutral/svg?seed=${avatarSeed}`,
+            alt=message.author.username,
             class='rounded-full shadow-lg'
           )
         article(
           class='rounded-lg border border-slate-300 p-4 shadow-sm duration-200 hover:shadow-md'
         )
           div(class='mb-3 sm:flex sm:flex-row-reverse sm:items-center sm:justify-between')
-            time(class='mb-1 text-sm text-slate-600 sm:mb-0') 2 hours ago
-            div(class='font-medium text-slate-700') McStanley
+            time(
+              datetime=message.dateISO,
+              title=message.dateString,
+              class='mb-1 text-sm text-slate-600 sm:mb-0'
+            )= message.timeFromNow
+            p(class='font-medium text-slate-700')= message.author.username
           div(
-            class='rounded-lg border border-slate-300 p-3 text-justify text-sm text-slate-600'
-          )
-            | Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet amet explicabo delectus id neque deserunt voluptatibus libero adipisci. Cum voluptates alias voluptatibus, dicta nostrum similique vitae repudiandae neque nisi tempora.
+            class='break-words rounded-lg border border-slate-300 p-3 text-justify text-sm text-slate-600'
+          )= message.text

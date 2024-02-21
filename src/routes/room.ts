@@ -5,4 +5,6 @@ const router = Router();
 
 router.get('/', roomController.room_GET);
 
+router.post('/submit', roomController.submit_POST);
+
 export default router;
