@@ -4,6 +4,7 @@ import createError from 'http-errors';
 import logger from 'morgan';
 import passport from 'passport';
 import path from 'path';
+import favicon from 'serve-favicon';
 
 import session from './middleware/session';
 import populateUser from './middleware/populateUser';
@@ -24,6 +25,9 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 
+app.use(favicon(path.join(ROOT_DIR, 'public', 'favicon.ico')));
+app.use('/static', express.static(path.join(ROOT_DIR, 'public')));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -32,8 +36,6 @@ app.use(session);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(populateUser);
-
-app.use('/static', express.static(path.join(ROOT_DIR, 'public')));
 
 app.use('/', indexRouter);
 app.use('/', authRouter);
