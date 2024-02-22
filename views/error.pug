@@ -1,6 +1,11 @@
 extends layout
 
 block content
-  h1= message
+  h1(class='text-center text-lg')= message
   h2= error.status
   pre #{ error.stack }
+  a(href='/', class='mx-auto mt-4 block max-w-max')
+    button(
+      type='button',
+      class='rounded bg-indigo-600 px-3 py-2 text-white duration-100 hover:bg-indigo-500'
+    ) Go home

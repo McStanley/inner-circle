@@ -55,3 +55,37 @@ export const submit_POST: RequestHandler[] = [
     res.redirect('/room');
   }),
 ];
+
+export const delete_GET: RequestHandler = asyncHandler(
+  async (req, res, next) => {
+    const message = await Message.findById(req.params.id).populate('author', {
+      username: 1,
+    });
+
+    if (!message) {
+      throw new Error('Could not find this message');
+    }
+
+    res.render('delete', { message });
+  },
+);
+
+export const delete_POST: RequestHandler = asyncHandler(
+  async (req, res, next) => {
+    const message = await Message.findById(req.params.id).populate('author', {
+      username: 1,
+    });
+
+    if (!message) {
+      throw new Error('Could not find this message');
+    }
+
+    if (!req.user || !message.author._id.equals(req.user._id)) {
+      throw new Error('You are not authorized to delete this message');
+    }
+
+    await message.deleteOne();
+
+    res.redirect('/room');
+  },
+);

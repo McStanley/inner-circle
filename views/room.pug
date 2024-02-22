@@ -46,15 +46,31 @@ block content
   ol(class='relative mx-auto mt-6 max-w-3xl border-l border-gray-300')
     each message in messages
       li(class='mb-10 ml-6 last:mb-0')
-        div(
-          class='absolute -left-3 size-6 rounded-full bg-indigo-100 ring-8 ring-slate-200'
-        )
-          - const avatarSeed = encodeURIComponent(message.author.username);
-          img(
-            src=`https://api.dicebear.com/7.x/avataaars-neutral/svg?seed=${avatarSeed}`,
-            alt=message.author.username,
-            class='rounded-full shadow-lg'
-          )
+        div(class='absolute -left-3')
+          div(class='size-6 rounded-full bg-indigo-100 ring-8 ring-slate-200')
+            - const avatarSeed = encodeURIComponent(message.author.username);
+            img(
+              src=`https://api.dicebear.com/7.x/avataaars-neutral/svg?seed=${avatarSeed}`,
+              alt=message.author.username,
+              class='rounded-full shadow-md'
+            )
+          - const isOwnMessage = message.author._id.equals(user?._id);
+          if isOwnMessage
+            a(href=`/room/delete/${message._id}`)
+              button(
+                type='button',
+                title='Delete this message',
+                class='mt-3 rounded-full bg-slate-200 ring-4 ring-slate-200 duration-100 hover:rotate-12 hover:text-red-900'
+              )
+                svg(viewBox='0 0 512 512', fill='currentColor', class='size-6')
+                  path(
+                    fill='none',
+                    d='M296 64h-80a7.91 7.91 0 00-8 8v24h96V72a7.91 7.91 0 00-8-8z'
+                  )
+                  path(
+                    d='M432 96h-96V72a40 40 0 00-40-40h-80a40 40 0 00-40 40v24H80a16 16 0 000 32h17l19 304.92c1.42 26.85 22 47.08 48 47.08h184c26.13 0 46.3-19.78 48-47l19-305h17a16 16 0 000-32zM192.57 416H192a16 16 0 01-16-15.43l-8-224a16 16 0 1132-1.14l8 224A16 16 0 01192.57 416zM272 400a16 16 0 01-32 0V176a16 16 0 0132 0zm32-304h-96V72a7.91 7.91 0 018-8h80a7.91 7.91 0 018 8zm32 304.57A16 16 0 01320 416h-.58A16 16 0 01304 399.43l8-224a16 16 0 1132 1.14z'
+                  )
+                span(class='sr-only') Delete this message
         article(
           class='rounded-lg border border-slate-300 p-4 shadow-sm duration-200 hover:shadow-md'
         )
